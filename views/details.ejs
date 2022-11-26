@@ -16,8 +16,14 @@
           <h6 class="card-subtitle mb-2 text-muted"><%= Contact.noHp %></h6>
           <p class="card-text"><%= Contact.email %></p>
           <form action="/contact?_method=DELETE" method="post" class="d-inline">
-            <input type="hidden" name="id" value="<%= Contact._id %>"  id="">
-            <button type="submit" class="btn btn-danger badge" onclick="return confirm('yakin?')">hapus</button>
+            <input type="hidden" name="id" value="<%= Contact._id %>" id="" />
+            <button
+              type="submit"
+              class="btn btn-danger badge"
+              onclick="return confirm('yakin?')"
+            >
+              hapus
+            </button>
           </form>
           <a
             href="/contact/edit/<%= Contact.nama %> "

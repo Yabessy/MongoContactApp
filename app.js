@@ -1,8 +1,8 @@
 const { urlencoded } = require("express");
 const express = require("express");
 const expresslayouts = require("express-ejs-layouts");
-const { body, validationResult, check } = require('express-validator');
-const methodOverride = require('method-override');
+const { body, validationResult, check } = require("express-validator");
+const methodOverride = require("method-override");
 const morgan = require("morgan");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -55,7 +55,7 @@ app.get("/contact/add", (req, res) => {
 app.post(
   "/contact",
   [
-    body("nama").custom(async(value) => {
+    body("nama").custom(async (value) => {
       const duplikat = await ContactModel.findOne({ nama: value });
       if (duplikat) {
         throw new Error("nama Contact suda digunakan");
@@ -82,15 +82,15 @@ app.post(
   }
 );
 
-app.delete('/contact', (req, res) => {
-  ContactModel.deleteOne({ _id: req.body.id}).then((result) => {
+app.delete("/contact", (req, res) => {
+  ContactModel.deleteOne({ _id: req.body.id }).then((result) => {
     req.flash("msg", "Data Contact Berhasil Dihapus");
     res.redirect("/contact");
-  })
-})
+  });
+});
 
 app.get("/contact/edit/:nama", async (req, res) => {
-  const contact = await ContactModel.findOne({nama:req.params.nama});
+  const contact = await ContactModel.findOne({ nama: req.params.nama });
   res.render("edit-contact", {
     layout: "layouts/main-layout",
     title: "Form Edit Data",
@@ -101,8 +101,8 @@ app.get("/contact/edit/:nama", async (req, res) => {
 app.put(
   "/contact",
   [
-    body("nama").custom(async(value,{req}) => {
-      const duplikat = await ContactModel.findOne({nama:value});
+    body("nama").custom(async (value, { req }) => {
+      const duplikat = await ContactModel.findOne({ nama: value });
       if (value !== req.body.namaLama && duplikat) {
         throw new Error("nama Contact suda digunakan");
       }
@@ -118,23 +118,25 @@ app.put(
         title: "Form Tambah Data",
         layout: "layouts/main-layout",
         errors: errors.array(),
-        contact: req.body
+        contact: req.body,
       });
     } else {
       ContactModel.updateOne(
-        {_id:req.body.id},
+        { _id: req.body.id },
         {
-         $set:{
-            nama:req.body.nama,
-            email:req.body.email,
-            noHp:req.body.noHp,
-         } 
-        }).then((result) => {
-      req.flash("msg", "Data Contact Berhasil diubah");
-      res.redirect("/contact");
-    });
+          $set: {
+            nama: req.body.nama,
+            email: req.body.email,
+            noHp: req.body.noHp,
+          },
+        }
+      ).then((result) => {
+        req.flash("msg", "Data Contact Berhasil diubah");
+        res.redirect("/contact");
+      });
+    }
   }
-})
+);
 
 app.get("/contact", async (req, res) => {
   const Contacts = await ContactModel.find();
@@ -142,12 +144,12 @@ app.get("/contact", async (req, res) => {
     layout: "layouts/main-layout",
     title: "contact",
     Contacts,
-    msg:req.flash('msg')
+    msg: req.flash("msg"),
   });
 });
 
 app.get("/contact/:nama", async (req, res) => {
-  const Contact = await ContactModel.findOne({nama:req.params.nama}) ;
+  const Contact = await ContactModel.findOne({ nama: req.params.nama });
   res.render("details", {
     layout: "layouts/main-layout",
     title: "Detail Contact",
@@ -158,6 +160,8 @@ app.get("/contact/:nama", async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
+
+//! this is security test
 
 // app.post(
 //   "/contact/update",
