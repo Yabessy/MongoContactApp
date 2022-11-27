@@ -40,6 +40,7 @@ app.get("/", async (req, res) => {
     title: "index",
     siswa,
   });
+  // res.send(siswa.slice(-1)[0]);
 });
 
 app.get("/about", (req, res) => {
