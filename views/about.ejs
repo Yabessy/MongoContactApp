@@ -4,6 +4,24 @@
         <img src="img/noel.jpg" class="img-thumbnail rounded-circle" alt="NOEL DAAAA" width="200" height="200">
       <h1 class="display-4">RAJA IBLIS</h1>
       <p class="lead">Pelajar | No-life for life</p>
+      <form name="submit-to-google-sheet">
+        <label for="email">email</label>
+        <input type="email" id="email" name="email">
+        <label for="pesan">pesan</label>
+        <input type="text" id="pesan" name="pesan">
+        <button type="submit">Send</button>
+      </form>
     </div>
   </div>
 </div>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby2SsuW1uMa5WEw-ij3dceA4Rj2LxV_6pUri8Vst8Rc_SBCTGM5X4s3tII21M21EUhZ/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
