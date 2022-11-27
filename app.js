@@ -34,11 +34,6 @@ app.use(flash());
 
 app.get("/", async (req, res) => {
   const siswa = await ContactModel.find();
-  // const siswa = [{
-  //   nama: "Rizky",
-  //   email: "rizki@gmail.com",
-  //   nohp: "08123456789",
-  // }];
   res.render("index", {
     layout: "layouts/main-layout",
     nama: "noels ",
