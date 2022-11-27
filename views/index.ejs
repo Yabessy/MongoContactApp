@@ -1,12 +1,17 @@
-<h1>WOYYY <%= nama %>WHAHAHAHH</h1>
-
-<h1>daftar siswa</h1>
-<% if (siswa.length < 1) { %>
-<p>masih kosong</p>
-<% } else { %>
-<ul>
-  <% siswa.forEach(e => { %>
-  <li><%= e.nama %></li>
-  <% }) %>
-</ul>
-<% } %>
+<div class="container mt-4">
+  <div class="row">
+    <h1>WOYYY <%= nama %>WHAHAHAHH</h1>
+    <h3>daftar siswa:</h1>
+    <% if (siswa.length < 1) { %>
+    <p>masih kosong</p>
+    <% } else { %>
+      <div class="col-md-7">
+        <ul class="row row-cols-2">
+          <% siswa.forEach(e => { %>
+          <li class="col list-group-item border-1"><%= e.nama %></li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </div>
+  </div>
+</div>  
