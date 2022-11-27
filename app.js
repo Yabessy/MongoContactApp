@@ -70,10 +70,7 @@ app.post(
     check("email", "Email Tidak Valid").isEmail(),
     check("noHp", "noHp Tidak Valid").isMobilePhone("id-ID"),
   ],
-  async (req, res) => {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxbVC7zhbrE_t_rNeeDiL52b5hk1uBsQI26251SZoAd1_VVe0zEYeZ8WFV0vAMuLRlO/exec";
-    const form = document.forms["submit-to-google-sheet"];
-    await fetch(scriptURL, { method: "POST", body: new FormData(form) });
+  (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.render("add-contact", {
