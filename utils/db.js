@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://Yabessy:C7zenS9MJbB5Z7W@cluster0.rgirup0.mongodb.net/belajarNodeJS')
+mongoose.connect('mongodb+srv://Yabessy:ggKPIHCPTPV1ecVJ@cluster0.rgirup0.mongodb.net/belajarNodeJS')
 
 //?insert one data
 // const Contact1 = new Contact({
